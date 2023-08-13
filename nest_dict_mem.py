@@ -1,9 +1,9 @@
 import sys
 from memory_profiler import profile
 
-num_nested_levels = 4  # Change this value to control the number of nested key-value pairs (excluding the most nested level).
+num_nested_levels = 1  # Change this value to control the number of nested key-value pairs (excluding the most nested level).
 keys_per_level = 1  # Each level, except the last, will have one key-value pair.
-final_level_keys = 10000  # The most nested level will have 10,000 key-value pairs.
+final_level_keys = 100000  # The most nested level will have 10,000 key-value pairs.
 
 @profile
 def create_nested_dictionary(keys_per_level, depth, final_level_keys):
@@ -26,10 +26,14 @@ def print_nested_dictionary(dictionary, indentation=""):
             print(f"{indentation}{key}:")
             print_nested_dictionary(value, indentation + "  ")
         else:
-            print(f"{indentation}{key}: {value}")
+            print(f"{indentation}{key}:{value}")
 
 if __name__ == '__main__':
   create_nested_dictionary(keys_per_level, num_nested_levels, final_level_keys)
+  create_nested_dictionary(keys_per_level, num_nested_levels + 1, final_level_keys)
+  create_nested_dictionary(keys_per_level, num_nested_levels + 2, final_level_keys)
+  create_nested_dictionary(keys_per_level, num_nested_levels + 3, final_level_keys)
+  create_nested_dictionary(keys_per_level, num_nested_levels + 4, final_level_keys)
 
 
 my_dict = create_nested_dictionary(keys_per_level, num_nested_levels, final_level_keys)
