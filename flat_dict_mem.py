@@ -1,36 +1,37 @@
-import sys
+import random
+import string
 from memory_profiler import profile
 
-OBJ_SIZE = 1000
-FILLING = 10
 
+def generate_random_string(length):
+    return ''.join(random.choices(string.ascii_letters, k=length))
 
+num = 100000
 @profile
-def amplify_object(initial_obj, amplif_num):
-    print(f"Expanding the original object by a factor of: {amplif_num}")
-    for idx in range(1, amplif_num + 1):
-        for inner_idx in range(OBJ_SIZE):
-            # add leading zeros to ensure the same string size
-            number_str = str(idx * 100 + inner_idx).zfill(FILLING)
-            key_name = f"This_Key_{number_str}"
-            value_name = f"Value_{number_str}"
-            initial_obj[key_name] = value_name
-    # return original object, which has now mutated
-    return initial_obj
+def create_flat_dictionary(num):
+  num_entries = num
+  max_key_length = 10
+  max_value_length = 20
 
+  dictionary = {}
+
+  for _ in range(num_entries):
+      key_length = random.randint(1, max_key_length)
+      value_length = random.randint(1, max_value_length)
+      key = generate_random_string(key_length)
+      value = generate_random_string(value_length)
+      dictionary[key] = value
+
+  # Printing the first few key-value pairs
+  for idx, (key, value) in enumerate(dictionary.items()):
+      print(f"{key}: {value}")
+      if idx >= 4:  # Displaying the first 5 entries
+          break
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("You need to provide the amplification factor. E.g.: python flat_dict_mem.py 100")
-        sys.exit(1)
-    amplif = int(sys.argv[1])
-
-    my_dict = {}
-    for idx in range(OBJ_SIZE):
-        # add leading zeros to ensure the same string size
-        number_str = str(idx).zfill(FILLING)
-        key_name = f"This_Key_{number_str}"
-        value_name = f"Value_{number_str}"
-        my_dict[key_name] = value_name
-
-    result = amplify_object(my_dict, amplif)
+  create_flat_dictionary(num)
+  create_flat_dictionary(num+1)
+  create_flat_dictionary(num+2)
+  create_flat_dictionary(num+3)
+  create_flat_dictionary(num+4)
+  
