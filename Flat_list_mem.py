@@ -1,15 +1,16 @@
 import random
 import string
-import sys
 from memory_profiler import profile
 
 
 def generate_random_string(length):
     return ''.join(random.choices(string.ascii_letters, k=length))
 
+num = 100000
+
 @profile
-def create_flat_dictionary():
-  num_entries = 10000
+def create_flat_list(num):
+  num_entries = num
   max_key_length = 10
   max_value_length = 20
 
@@ -30,4 +31,8 @@ def create_flat_dictionary():
 
 
 if __name__ == '__main__':
-  create_flat_dictionary()
+  create_flat_list(num)
+  create_flat_list(num+1)
+  create_flat_list(num+2)
+  create_flat_list(num+3)
+  create_flat_list(num+4)
