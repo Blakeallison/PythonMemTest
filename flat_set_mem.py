@@ -5,9 +5,10 @@ from memory_profiler import profile
 def generate_random_string(length):
     return ''.join(random.choices(string.ascii_letters, k=length))
 
+num = 100000
 @profile
-def create_set_dictionary():
-  num_entries = 10000
+def create_set_dictionary(num):
+  num_entries = num
   max_key_length = 10
   max_value_length = 20
 
@@ -29,4 +30,8 @@ def create_set_dictionary():
           break
       
 if __name__ == '__main__':
-  create_set_dictionary()
+  create_set_dictionary(num)
+  create_set_dictionary(num+1)
+  create_set_dictionary(num+2)
+  create_set_dictionary(num+3)
+  create_set_dictionary(num+4)
